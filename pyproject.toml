@@ -1,0 +1,14 @@
+[build-system]
+requires = ["hatchling>=1.12"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gapwrapper"
+version = "0.1.0"
+description = "A simple Python wrapper for GAP (Groups, Algorithms, Programming)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.hatch.build]
+sources = ["src"]
