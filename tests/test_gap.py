@@ -155,13 +155,17 @@ class TestGAPContextManager:
     def test_context_manager_exit_closes(self):
         """Test that __exit__ closes the process."""
         from gapwrapper import GAP
+        import time
+        
         with GAP() as gap:
             process = gap.process
         
         # After exiting context, process should be terminated
-        # Give it a moment to terminate
-        import time
-        time.sleep(0.5)
+        # Poll with timeout instead of fixed sleep
+        timeout = 5.0
+        start = time.time()
+        while process.poll() is None and (time.time() - start) < timeout:
+            time.sleep(0.1)
         assert process.poll() is not None
 
     def test_context_manager_usage(self):
@@ -178,14 +182,19 @@ class TestGAPClose:
     def test_close_terminates_process(self):
         """Test that close() terminates the process."""
         from gapwrapper import GAP
+        import time
+        
         gap = GAP()
         process = gap.process
         
         gap.close()
         
         # Process should be terminated
-        import time
-        time.sleep(0.5)
+        # Poll with timeout instead of fixed sleep
+        timeout = 5.0
+        start = time.time()
+        while process.poll() is None and (time.time() - start) < timeout:
+            time.sleep(0.1)
         assert process.poll() is not None
 
     def test_close_is_idempotent(self):
