@@ -6,7 +6,7 @@ A simple Python wrapper for GAP (Groups, Algorithms, Programming).
 
 You can install the package directly from GitHub.
 
-### 1. Using pip (non-editable)
+### Using pip (non-editable)
 
 This installs the latest version:
 
